@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-04/hyper-schema#",
+    "type": "object",
+    "properties": {
+      "readme": {
+        "type": "string",
+        "title": "Outpaint - Flux.1 DEV",
+        "api": "https://github.com/camenduru/tost-api-examples/blob/main/v1/outpaint-flux.ipynb",
+        "tags": [
+          "Image to Image"
+        ],
+        "widget": "readme"
+      },
+      "input_image": {
+        "type": "string",
+        "description": "Input Image URL",
+        "widget": "textarea"
+      },
+      "left_percent": {
+        "type": "integer",
+        "description": "Left Canvas Expension Percent"
+      },
+      "right_percent": {
+        "type": "integer",
+        "description": "Right Canvas Expension Percent"
+      },
+      "top_percent": {
+        "type": "integer",
+        "description": "Top Canvas Expension Percent"
+      },
+      "bottom_percent": {
+        "type": "integer",
+        "description": "Bottom Canvas Expension Percent"
+      },
+      "aspect_ratio_width": {
+        "type": "integer",
+        "description": "Aspect Ratio Width"
+      },
+      "aspect_ratio_height": {
+        "type": "integer",
+        "description": "Aspect Ratio Height"
+      },
+      "aspect_ratio_toggle": {
+        "type": "boolean",
+        "description": "Aspect Ratio Toggle"
+      },
+      "seed": {
+        "type": "integer",
+        "description": "Seed"
+      },
+      "prompt_toggle": {
+        "type": "boolean",
+        "description": "Caption Toggle"
+      },
+      "positive_prompt": {
+        "type": "string",
+        "description": "Positive Prompt",
+        "widget": "textarea"
+      },
+      "negative_prompt": {
+        "type": "string",
+        "description": "Negative Prompt",
+        "widget": "textarea"
+      },
+      "num_inference_steps": {
+        "type": "integer",
+        "description": "Num Inference Steps"
+      },
+      "controlnet_conditioning_scale": {
+        "type": "number",
+        "description": "ControlNet Conditioning Scale"
+      },
+      "guidance_scale": {
+        "type": "number",
+        "description": "Guidance Scale"
+      },
+      "true_guidance_scale": {
+        "type": "number",
+        "description": "True Guidance Scale"
+      },
+      "vlm_prompt": {
+        "type": "string",
+        "description": "Caption Prompt",
+        "widget": "textarea"
+      },
+      "max_new_tokens": {
+        "type": "integer",
+        "description": "Max New Tokens"
+      },
+      "top_k": {
+        "type": "number",
+        "description": "Top K"
+      },
+      "temperature": {
+        "type": "number",
+        "description": "Temperature"
+      },
+      "example": {
+        "type": "string",
+        "image1": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
+        "image2": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
+        "image3": "https://fakeimg.pl/512x512/282828/eae0d0/?text=output#.png",
+        "image4": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
+        "widget": "example"
+      }
+    },
+    "buttons": [
+      {
+        "id": "enter",
+        "label": "🥪 Enter"
+      }
+    ]
+  }

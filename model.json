@@ -1,0 +1,22 @@
+{
+    "input_image": "https://files.catbox.moe/ct5416.png",
+    "left_percent": 0,
+    "right_percent": 0,
+    "top_percent": 0,
+    "bottom_percent": 0,
+    "aspect_ratio_width": 16,
+    "aspect_ratio_height": 9,
+    "aspect_ratio_toggle": true,
+    "seed": 0,
+    "prompt_toggle": true,
+    "positive_prompt": " ",
+    "negative_prompt": " ",
+    "num_inference_steps": 28,
+    "controlnet_conditioning_scale": 0.9,
+    "guidance_scale": 3.5,
+    "true_guidance_scale": 3.5,
+    "vlm_prompt": "A descriptive caption for this image:\n",
+    "max_new_tokens": 300,
+    "top_k": 10,
+    "temperature": 0.5
+}
