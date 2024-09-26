@@ -28,7 +28,7 @@
       },
       "top_percent": {
         "type": "integer",
-        "description": "Top Canvas Expansion Percentage"
+        "description": "Top Canvas Expansion Percent"
       },
       "bottom_percent": {
         "type": "integer",
