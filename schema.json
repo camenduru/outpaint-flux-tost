@@ -5,6 +5,7 @@
       "readme": {
         "type": "string",
         "title": "Outpaint - Flux.1 DEV",
+        "code": "https://github.com/alimama-creative/FLUX-Controlnet-Inpainting",
         "api": "https://github.com/camenduru/tost-api-examples/blob/main/v1/outpaint-flux.ipynb",
         "tags": [
           "Image to Image"
@@ -32,6 +33,10 @@
         "type": "integer",
         "description": "Bottom Canvas Expension Percent"
       },
+      "aspect_ratio_toggle": {
+        "type": "boolean",
+        "description": "Aspect Ratio Toggle"
+      },
       "aspect_ratio_width": {
         "type": "integer",
         "description": "Aspect Ratio Width"
@@ -40,27 +45,24 @@
         "type": "integer",
         "description": "Aspect Ratio Height"
       },
-      "aspect_ratio_toggle": {
-        "type": "boolean",
-        "description": "Aspect Ratio Toggle"
-      },
       "seed": {
         "type": "integer",
         "description": "Seed"
       },
       "prompt_toggle": {
         "type": "boolean",
-        "description": "Caption Toggle"
+        "description": "Caption Toggle",
+        "widget": "hidden"
       },
       "positive_prompt": {
         "type": "string",
         "description": "Positive Prompt",
-        "widget": "textarea"
+        "widget": "hidden"
       },
       "negative_prompt": {
         "type": "string",
         "description": "Negative Prompt",
-        "widget": "textarea"
+        "widget": "hidden"
       },
       "num_inference_steps": {
         "type": "integer",
