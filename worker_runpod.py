@@ -1,6 +1,7 @@
 import os, json, requests, random, time, runpod
 
 import torch
+from diffusers.utils import load_image
 from controlnet_flux import FluxControlNetModel
 from transformer_flux import FluxTransformer2DModel
 from pipeline_flux_controlnet_inpaint import FluxControlNetInpaintingPipeline
@@ -61,7 +62,7 @@ def expand_image(image_path, left_percent=0, right_percent=0, top_percent=0, bot
     new_height = height + top_expansion + bottom_expansion
     expanded_img = Image.new('RGB', (new_width, new_height), (255, 255, 255))
     expanded_img.paste(img, (left_expansion, top_expansion))
-    mask_img = Image.new('RGB', (new_width, new_height), (255, 255, 255))  # White mask
+    mask_img = Image.new('RGB', (new_width, new_height), (255, 255, 255))
     mask_img.paste((0, 0, 0), [left_expansion, top_expansion, left_expansion + width, top_expansion + height])
     if aspect_ratio_toggle and aspect_ratio_width and aspect_ratio_height:
         aspect_ratio_value = aspect_ratio_width / aspect_ratio_height
@@ -75,15 +76,30 @@ def expand_image(image_path, left_percent=0, right_percent=0, top_percent=0, bot
         x_offset = (final_width - new_width) // 2
         y_offset = (final_height - new_height) // 2
         aspect_img.paste(expanded_img, (x_offset, y_offset))
-        aspect_img.save(output_path)
-        aspect_mask = Image.new('RGB', (final_width, final_height), (255, 255, 255))  # White mask
-        aspect_mask.paste((0, 0, 0), [x_offset, y_offset, x_offset + new_width, y_offset + new_height])
-        aspect_mask.save(mask_output_path)
-        return final_width, final_height
-    else:
-        expanded_img.save(output_path)        
-        mask_img.save(mask_output_path)        
-        return new_width, new_height
+        expanded_img = aspect_img
+        aspect_mask = Image.new('RGB', (final_width, final_height), (255, 255, 255))
+        aspect_mask.paste((0, 0, 0), [x_offset + left_expansion, y_offset + top_expansion,
+                                      x_offset + left_expansion + width, y_offset + top_expansion + height])
+        mask_img = aspect_mask
+        new_width, new_height = final_width, final_height
+    if new_width != 768 and new_height != 768:
+        if new_width < new_height:
+            scaling_factor = 768 / new_width
+            final_width = 768
+            final_height = int(new_height * scaling_factor)
+        else:
+            scaling_factor = 768 / new_height
+            final_height = 768
+            final_width = int(new_width * scaling_factor)
+        if final_height == 768:
+            final_width = (final_width // 16) * 16
+        elif final_width == 768:
+            final_height = (final_height // 16) * 16
+        expanded_img = expanded_img.resize((final_width, final_height), resample=Image.LANCZOS)
+        mask_img = mask_img.resize((final_width, final_height), resample=Image.LANCZOS)
+    expanded_img.save(output_path)
+    mask_img.save(mask_output_path)
+    return final_width, final_height
 
 def closestNumber(n, m):
     q = int(n / m)
@@ -163,19 +179,19 @@ def generate(input):
 
     final_width, final_height = expand_image(input_image, left_percent=left_percent, right_percent=right_percent, top_percent=top_percent, bottom_percent=bottom_percent, aspect_ratio_width=aspect_ratio_width,
                                             aspect_ratio_height=aspect_ratio_height, aspect_ratio_toggle=aspect_ratio_toggle, output_path='/content/expanded_image.png', mask_output_path="/content/expanded_mask_image.png")
-    final_width = closestNumber(final_width, 16)
-    final_height = closestNumber(final_height, 16)
-    image = Image.open('/content/expanded_image.png').convert("RGB")
-    mask = Image.open('/content/expanded_mask_image.png').convert("RGB")
+    image = load_image('/content/expanded_image.png').convert("RGB")
+    mask = load_image('/content/expanded_mask_image.png').convert("RGB")
     if seed == 0:
         random.seed(int(time.time()))
         seed = random.randint(0, np.iinfo(np.int32).max)
     generator = torch.Generator(device="cuda").manual_seed(seed)
+    final_width = closestNumber(final_width, 16)
+    final_height = closestNumber(final_height, 16)
     outpaint = pipe(prompt=positive_prompt, height=final_height, width=final_width, control_image=image, control_mask=mask, num_inference_steps=num_inference_steps, 
                 generator=generator, controlnet_conditioning_scale=controlnet_conditioning_scale, guidance_scale=guidance_scale, negative_prompt=negative_prompt, true_guidance_scale=true_guidance_scale).images[0]
-    outpaint.save(f"/content/outpaint-flux-[{final_width}x{final_height}]-tost.png")
+    outpaint.save(f"/content/outpaint-flux--{final_width}x{final_height}--tost.png")
 
-    result = f"/content/outpaint-flux-[{final_width}x{final_height}]-tost.png"
+    result = f"/content/outpaint-flux--{final_width}x{final_height}--tost.png"
     try:
         notify_uri = values['notify_uri']
         del values['notify_uri']
