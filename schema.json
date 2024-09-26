@@ -4,7 +4,8 @@
     "properties": {
       "readme": {
         "type": "string",
-        "title": "Outpaint - Flux.1 DEV",
+        "title": "Flux.1 DEV ControlNet Outpainting",
+        "author": "lllyasviel, Alimama Creative",
         "code": "https://github.com/alimama-creative/FLUX-Controlnet-Inpainting",
         "api": "https://github.com/camenduru/tost-api-examples/blob/main/v1/outpaint-flux.ipynb",
         "tags": [
@@ -19,19 +20,19 @@
       },
       "left_percent": {
         "type": "integer",
-        "description": "Left Canvas Expension Percent"
+        "description": "Left Canvas Expansion Percent"
       },
       "right_percent": {
         "type": "integer",
-        "description": "Right Canvas Expension Percent"
+        "description": "Right Canvas Expansion Percent"
       },
       "top_percent": {
         "type": "integer",
-        "description": "Top Canvas Expension Percent"
+        "description": "Top Canvas Expansion Percentage"
       },
       "bottom_percent": {
         "type": "integer",
-        "description": "Bottom Canvas Expension Percent"
+        "description": "Bottom Canvas Expansion Percent"
       },
       "aspect_ratio_toggle": {
         "type": "boolean",
@@ -99,11 +100,12 @@
       },
       "example": {
         "type": "string",
-        "image1": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
-        "image2": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
-        "image3": "https://fakeimg.pl/512x512/282828/eae0d0/?text=output#.png",
-        "image4": "https://fakeimg.pl/512x512/282828/eae0d0/?text=input#.png",
-        "widget": "example"
+        "image1": "https://files.catbox.moe/90j3n3.gif",
+        "image2": "https://files.catbox.moe/o16alj.gif",
+        "image3": "https://files.catbox.moe/5hb7d9.gif",
+        "image4": "https://files.catbox.moe/f300lu.gif",
+        "widget": "example",
+        "line1": "It works well with 16:9 horizontal outpaintings. For vertical outpainting, please disable the aspect ratio and use canvas expansions."
       }
     },
     "buttons": [
