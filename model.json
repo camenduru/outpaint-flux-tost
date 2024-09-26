@@ -7,7 +7,7 @@
     "aspect_ratio_width": 16,
     "aspect_ratio_height": 9,
     "aspect_ratio_toggle": true,
-    "seed": 0,
+    "seed": 24,
     "prompt_toggle": true,
     "positive_prompt": " ",
     "negative_prompt": " ",
