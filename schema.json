@@ -16,7 +16,7 @@
       "upload": {
         "type": "string",
         "widget": "upload",
-        "upload_url": "https://cors-anywhere.herokuapp.com/https://uguu.se/upload?output=json",
+        "upload_url": "https://litterbox.catbox.moe/resources/internals/api.php",
         "property": "input_image"
       },
       "input_image": {
