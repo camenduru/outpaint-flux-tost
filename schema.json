@@ -13,6 +13,12 @@
         ],
         "widget": "readme"
       },
+      "upload": {
+        "type": "string",
+        "widget": "upload",
+        "upload_url": "https://cors-anywhere.herokuapp.com/https://uguu.se/upload?output=json",
+        "property": "input_image"
+      },
       "input_image": {
         "type": "string",
         "description": "Input Image URL",
