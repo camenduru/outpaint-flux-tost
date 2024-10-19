@@ -15,4 +15,4 @@ https://github.com/alimama-creative/FLUX-Controlnet-Inpainting
 ![ezgif com-animated-gif-maker (6)](https://github.com/user-attachments/assets/b0aea46b-e0d1-477d-aa34-8876f4ec6a20)
 
 ### 🏢 Sponsor
-https://runpod.io
+[https://runpod.io](https://runpod.io?ref=iqi9iy8y)
